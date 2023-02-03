@@ -1,17 +1,14 @@
-import express from "express";
-import { Server } from "socket.io";
-import http from 'http';
+import { database } from "./database";
+import { app } from "./express";
+import "./Model/category";
+import "./Model/item";
 
-const app = express();
-const server = http.createServer(app);
+async function main() {
 
-server.listen(80);
+    await database.sync({ force: false, alter: true });
+    await app.listen(80);
 
-const socket = new Server(server);
+}
 
-socket.on("connection", () => {
-    console.log("conectado");
 
-socket.emit("respuesta","bienvenidohola");
-
-});
+main();
