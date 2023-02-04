@@ -2,6 +2,7 @@ import { database } from "./database";
 import { app } from "./express";
 import "./Model/category";
 import "./Model/item";
+import "./Model/users";
 
 async function main() {
 

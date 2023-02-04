@@ -13,6 +13,7 @@ const database_1 = require("./database");
 const express_1 = require("./express");
 require("./Model/category");
 require("./Model/item");
+require("./Model/users");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         yield database_1.database.sync({ force: false, alter: true });
