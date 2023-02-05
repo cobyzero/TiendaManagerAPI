@@ -33,17 +33,49 @@ export const getItemforCategoryController = async (req: express.Request, res: ex
 
     res.json(data);
 }
+
+export const getItemforIdController = async (req: express.Request, res: express.Response) => {
+
+    const json = JSON.parse(req.body);
+
+    const { id } = json;
+
+    const data = await item.findOne({
+        where: {
+            id,
+        }
+    });
+
+    if(data == null){
+        res.sendStatus(404);
+    }
+
+    res.json(data);
+}
+
+
+
+
+
+
+
+
+
+
 /**
  * Set
  */
 export const setItemController = async (req: express.Request, res: express.Response) => {
 
-    const { nameItem, descriptionItem, priceItem, imageItem, amountItem, uItem } = req.body;
+    const { nameItem, descriptionItem, priceItem, imageItem, amountItem, uItem, categoryId } = req.body;
 
     await item.create({
-        nameItem, descriptionItem, priceItem, imageItem, amountItem, uItem
+        nameItem, descriptionItem, priceItem, imageItem, amountItem, uItem, categoryId
     });
 
     res.sendStatus(200);
 }
+
+
+
 

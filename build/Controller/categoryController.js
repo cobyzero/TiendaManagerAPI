@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setCategoryController = exports.getCategoryController = void 0;
+exports.getCategoryForIdController = exports.setCategoryController = exports.getCategoryController = void 0;
 const category_1 = require("../Model/category");
 const getCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield category_1.Category.findAll();
@@ -22,3 +22,17 @@ const setCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, fu
     res.sendStatus(200);
 });
 exports.setCategoryController = setCategoryController;
+const getCategoryForIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const json = JSON.parse(req.body);
+    const { id } = json;
+    const data = yield category_1.Category.findOne({
+        where: {
+            id,
+        }
+    });
+    if (data == null) {
+        res.sendStatus(404);
+    }
+    res.json(data);
+});
+exports.getCategoryForIdController = getCategoryForIdController;

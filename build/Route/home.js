@@ -9,6 +9,7 @@ exports.routerHome = routerHome;
 routerHome.get("/api/getCategory", categoryController_1.getCategoryController);
 routerHome.post("/api/setCategory", categoryController_1.setCategoryController);
 routerHome.post("/api/setItem", itemController_1.setItemController);
+routerHome.post("/api/getCategoryForId", categoryController_1.getCategoryForIdController);
 routerHome.get("/api/getItem", itemController_1.getItemController);
 routerHome.get("/api/getItemPopular", itemController_1.getItemPopularController);
 routerHome.get("/api/getItemforCategory/:categoryId", itemController_1.getItemforCategoryController);

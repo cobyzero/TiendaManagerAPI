@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setItemController = exports.getItemforCategoryController = exports.getItemPopularController = exports.getItemController = void 0;
+exports.setItemController = exports.getItemforIdController = exports.getItemforCategoryController = exports.getItemPopularController = exports.getItemController = void 0;
 const item_1 = require("../Model/item");
 /**
  * Get
@@ -39,13 +39,27 @@ const getItemforCategoryController = (req, res) => __awaiter(void 0, void 0, voi
     res.json(data);
 });
 exports.getItemforCategoryController = getItemforCategoryController;
+const getItemforIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const json = JSON.parse(req.body);
+    const { id } = json;
+    const data = yield item_1.item.findOne({
+        where: {
+            id,
+        }
+    });
+    if (data == null) {
+        res.sendStatus(404);
+    }
+    res.json(data);
+});
+exports.getItemforIdController = getItemforIdController;
 /**
  * Set
  */
 const setItemController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { nameItem, descriptionItem, priceItem, imageItem, amountItem, uItem } = req.body;
+    const { nameItem, descriptionItem, priceItem, imageItem, amountItem, uItem, categoryId } = req.body;
     yield item_1.item.create({
-        nameItem, descriptionItem, priceItem, imageItem, amountItem, uItem
+        nameItem, descriptionItem, priceItem, imageItem, amountItem, uItem, categoryId
     });
     res.sendStatus(200);
 });

@@ -17,4 +17,20 @@ export const setCategoryController = async (req: express.Request, res: express.R
 
 
 
- 
+export const getCategoryForIdController = async (req: express.Request, res: express.Response) => {
+
+    const json = JSON.parse(req.body);
+    const { id } = json;
+
+    const data = await Category.findOne({
+        where: {
+            id,
+        }
+    });
+
+    if (data == null) {
+        res.sendStatus(404);
+    }
+    res.json(data);
+
+};
